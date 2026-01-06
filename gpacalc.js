@@ -23,10 +23,7 @@ function getValue(el){
             break;
     }
 }
-function getId(el){
-    getValue(el);
-    getCredits(el);
-}
+
 function getCredits(el){
     credits_value.push(el.value);
 } 
