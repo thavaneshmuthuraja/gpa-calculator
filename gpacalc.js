@@ -2,26 +2,42 @@ var grade_value =[];
 var credits_value=[];
 function getValue(el){
     const grade_score=el.value;
+    let val=0;
     switch (grade_score){
-        case "o":
-            grade_value.push(10);
+        case "O":
+            val=10;
+            grade_value.push(val);
             break;
         case "A+":
-             grade_value.push(9);
+             val=9;
+             grade_value.push(val);
             break;
         case "A":
-              grade_value.push(8);
+             val=8;
+              grade_value.push(val);
             break;
         case "B+":
-            grade_value.push(7);
+             val=7;
+            grade_value.push(val);
             break;
         case "B":
-            grade_value.push(6);
+             val=6;
+            grade_value.push(val);
             break;
         case "C":
-            grade_value.push(5);
+             val=5;
+            grade_value.push(val);
             break;
     }
+    //console.log(val);
+    showValue(val,el);
+}
+function showValue(value,selectElement){
+    const para=selectElement
+                        .closest("td")
+                        .nextElementSibling
+                        .querySelector("p");
+                        para.textContent=value;
 }
 
 function getCredits(el){
