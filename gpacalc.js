@@ -2,35 +2,37 @@ var grade_value =[];
 var credits_value=[];
 function getValue(el){
     const grade_score=el.value;
+    const index=el.dataset.index;
     let val=0;
     switch (grade_score){
         case "O":
             val=10;
-            grade_value.push(val);
             break;
         case "A+":
              val=9;
-             grade_value.push(val);
             break;
         case "A":
              val=8;
-              grade_value.push(val);
             break;
         case "B+":
              val=7;
-            grade_value.push(val);
             break;
         case "B":
              val=6;
-            grade_value.push(val);
             break;
         case "C":
              val=5;
-            grade_value.push(val);
             break;
     }
     //console.log(val);
-    showValue(val,el);
+    if(grade_score===""){
+    grade_value[index]=undefined;
+    showValue(undefined,el);
+}else {
+        grade_value[index]=val;
+        showValue(val,el);
+
+    }
 }
 function showValue(value,selectElement){
     const para=selectElement
@@ -41,14 +43,23 @@ function showValue(value,selectElement){
 }
 
 function getCredits(el){
-    credits_value.push(Number(el.value));
+    const index=el.dataset.index;
+    credits_value[index]=Number(el.value);
 } 
 function calculateGpa(){
     let tot_cre=0,tot_val=0;
-    for(let i=0;i<grade_value.length;i++){
+    const res=document.getElementById("result");
+    for(let i=0;i<6;i++){
+          if (
+            typeof grade_value[i] !== "number" ||
+            typeof credits_value[i] !== "number"
+        ) {
+            document.getElementById("result").textContent =
+                "Please select grade and credits for all courses";
+            return;
+        }
         tot_cre+=credits_value[i];
         tot_val+=credits_value[i]*grade_value[i];
     }
-    const res=document.getElementById("result");
-    res.textContent="Your Gpa: "+tot_val/tot_cre;
+    res.textContent="Your Gpa: "+(tot_val/tot_cre).toFixed(3);
 }
