@@ -41,5 +41,14 @@ function showValue(value,selectElement){
 }
 
 function getCredits(el){
-    credits_value.push(el.value);
+    credits_value.push(Number(el.value));
 } 
+function calculateGpa(){
+    let tot_cre=0,tot_val=0;
+    for(let i=0;i<grade_value.length;i++){
+        tot_cre+=credits_value[i];
+        tot_val+=credits_value[i]*grade_value[i];
+    }
+    const res=document.getElementById("result");
+    res.textContent="Your Gpa: "+tot_val/tot_cre;
+}
